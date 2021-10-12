@@ -10,7 +10,8 @@ const emojiImgs = {
 /**
  * Main app code
  */
-fakeMoodRequest();
+let mood = fakeMoodRequest();
+console.log(mood);
 
 /**
  * This function will simulate fetching David's current Mood from the internet
@@ -19,15 +20,28 @@ fakeMoodRequest();
  * with the message "unavailable". If it successfully fetches, then one of
  * ["hangry", "sad", "shocked", "happy", "scared"] will be resolved.
  */
+// function fakeMoodRequest() {
+//   let delay = Math.floor(Math.random() * 3000);
+//   setTimeout(() => {
+//     // this is the code that runs after the delay
+//     if (Math.random() < 0.2) {
+//       return "unavailable";
+//     }
+//     const moods = ["hangry", "sad", "shocked", "happy", "scared"];
+//     return moods[Math.floor(Math.random() * moods.length)];
+//   }, delay);
+// }
+
 function fakeMoodRequest() {
-  let delay = Math.floor(Math.random() * 3000);
-  setTimeout(() => {
-    // this is the code that runs after the delay
-    if (Math.random() < 0.2) {
-      console.log("unavailable");
-    } else {
+  return new Promise((resolve, reject) => {
+    let delay = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      // this is the code that runs after the delay
+      if (Math.random() < 0.2) {
+        reject("unavailable");
+      }
       const moods = ["hangry", "sad", "shocked", "happy", "scared"];
-      console.log(moods[Math.floor(Math.random() * moods.length)]);
-    }
-  }, delay);
+      resolve(moods[Math.floor(Math.random() * moods.length)]);
+    }, delay);
+  });
 }
